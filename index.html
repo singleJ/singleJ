@@ -1,8 +1,123 @@
+<!DOCTYPE html>
 <html>
+
 <head>
-<title>蒋翌欣-吴雅的婚礼请柬</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<title>蒋翌欣-吴雅的婚礼请柬</title>
 </head>
+<style type="text/css">
+	body {
+		background: url('background01.jpg');
+		background-repeat: no-repeat;
+		background-size: cover;
+	}
+
+	.h2 {
+		text-align: center;
+		/* color: black; */
+		color: #FAFAD2;
+		text-shadow: 3px 3px 5px black;
+		font-size: 35px;
+		font-weight: bold;
+		font-family: 楷体;
+		padding-top: 20px;
+	}
+
+	#info0 {
+		color: #FAFAD2;
+		text-shadow: 5px 5px 5px black;
+		/* -webkit-text-stroke: 2px black; */
+		font-size: 2em;
+	}
+
+	#main {
+		width: 80%;
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	#name,
+	#info4,
+	#info5,
+	#countdown {
+		text-align: left;
+	}
+
+	#info1,
+	#info2 {
+		display: none;
+	}
+
+	/* #info2 {
+			color: red;
+			font-family: 微软雅黑;
+			letter-spacing: 10px;
+		} */
+	#info3 {
+		text-align: left;
+		text-indent: 2em;
+	}
+
+	a {
+		color: #FAFAD2;
+	}
+	/* 音乐播放样式 开始 */
+	@font-face {
+		font-family: 'iconfont';
+		/* project id 934283 */
+		src: url('http://at.alicdn.com/t/font_934283_rjwklbuzkg.eot');
+		src: url('http://at.alicdn.com/t/font_934283_rjwklbuzkg.eot?#iefix') format('embedded-opentype'),
+			url('http://at.alicdn.com/t/font_934283_rjwklbuzkg.woff') format('woff'),
+			url('http://at.alicdn.com/t/font_934283_rjwklbuzkg.ttf') format('truetype'),
+			url('http://at.alicdn.com/t/font_934283_rjwklbuzkg.svg#iconfont') format('svg');
+	}
+
+	@keyframes rotate {
+		from {
+			/* transform: rotate(0deg) */
+		}
+
+		to {
+			transform: rotate(359deg);
+		}
+	}
+
+	#play-btn {
+		position: absolute;
+		top: 16px;
+		right: 20px;
+		z-index: 30;
+		width: 34px;
+		height: 34px;
+		border-radius: 50%;
+		line-height: 33px;
+		padding-right: 2px;
+		border: 2px solid #efefef;
+		text-align: center;
+		-webkit-transition-duration: 1s;
+		-webkit-animation: rotate 3s linear infinite;
+		animation: rotate 3s linear infinite;
+		animation-play-state: paused;
+		color: #efefef;
+		box-shadow: 1px 2px 2px #777;
+	}
+
+	.iconfont {
+		font-family: "iconfont" !important;
+		font-size: 16px;
+		font-style: normal;
+		-webkit-font-smoothing: antialiased;
+		-webkit-text-stroke-width: 0.2px;
+		-moz-osx-font-smoothing: grayscale;
+	}
+
+	/* 音乐播放样式 结束 */
+</style>
+
 <body onload="getNowDate();timet()">
+	<div id="play-btn"><i class="iconfont" style="font-size: 20px;"></i></div>
 	<div class="h2">
 		<h2 id="info0"></h2>
 		<div id="main">
@@ -18,156 +133,144 @@
 			<h2 id="countdown"></h2>
 		</div>
 	</div>
+	<audio id="mp3" src="./music.mp3" autoplay loop></audio>
 
-	<style type="text/css">
-		body {
-			background: url('background01.jpg');
-			background-repeat: no-repeat;
-			background-size: cover;
-		}
-		.h2 {
-			text-align: center;
-			/* color: black; */
-			color: #FAFAD2;
-			text-shadow:3px 3px 5px black;
-			font-size: 35px;
-			font-weight: bold;
-			font-family: 楷体;
-			padding-top: 20px;
-		}
-		#info0{
-			color: #FAFAD2;
-			text-shadow:5px 5px 5px black;
-			/* -webkit-text-stroke: 2px black; */
-      font-size: 2em;
-		}
-		#main{
-      width: 80%;
-			margin-left: auto;
-			margin-right: auto;
-		}
-		#name,#info4,#info5,#countdown{
-			text-align: left;
-		}
-		#info1,#info2{
-			display: none;
-		}
-		/* #info2 {
-			color: red;
-			font-family: 微软雅黑;
-			letter-spacing: 10px;
-		} */
-		#info3{
-			text-align: left;
-			text-indent: 2em;
-		}
-		a{
-			color: #FAFAD2;
-		}
-	</style>
-	
 	<script type="text/javascript">
 		{
-			var n=1;
+			var n = 1;
 			var ua = navigator.userAgent.toLowerCase();
-			if (ua.match(/QQ/i) == "qq" && ua.indexOf(' qq')>-1) {
-				n=0;
+			if (ua.match(/QQ/i) == "qq" && ua.indexOf(' qq') > -1) {
+				n = 0;
 				document.getElementById("info0").innerHTML = "你好啊，今天过得怎么样？";
 			}
-			while(n==1) {
-				var name=prompt("请输入您的名字","时间煮雨");
-				if (name!="null") {
-					var re=/[^\u4e00-\u9fa5]/;
-		            if(!re.test(name)) {
-						if (name.length>1 && name.length<5) {
+			while (n == 1) {
+				var name = prompt("请输入您的名字", "时间煮雨");
+				if (name != "null") {
+					var re = /[^\u4e00-\u9fa5]/;
+					if (!re.test(name)) {
+						if (name.length > 1 && name.length < 5) {
 							document.getElementById("info0").innerHTML = "蒋翌欣-吴雅 的 婚礼请柬";
-							document.getElementById("name").innerHTML = name+"台启，";
-							n=0;
-						}
-						else {
+							document.getElementById("name").innerHTML = name + "台启，";
+							n = 0;
+						} else {
 							alert("请重新输入正确格式！");
 						}
-		            }
-		            else {
-		            	alert("请输入正确格式！");
-		            }
-				}
-				else {
+					} else {
+						alert("请输入正确格式！");
+					}
+				} else {
 					alert("请输入您的名字，谢谢！")
 				}
 			}
 		}
+
 		function getNowDate() {
 			var date = new Date();
 			var year = date.getFullYear() // 年
 			var month = date.getMonth() + 1; // 月
-			var day  = date.getDate(); // 日
+			var day = date.getDate(); // 日
 			var hour = date.getHours(); // 时
 			var minutes = date.getMinutes(); // 分
 			var seconds = date.getSeconds() //秒
-			var weekArr = ['星期日','星期一', '星期二', '星期三', '星期四', '星期五', '星期六' ];
+			var weekArr = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
 			var week = weekArr[date.getDay()];
 			// 给一位数数据前面加 “0”
 			if (month >= 1 && month <= 9) {
-			 month = "0" + month;
+				month = "0" + month;
 			}
 			if (day >= 0 && day <= 9) {
-			 day = "0" + day;
+				day = "0" + day;
 			}
 			if (hour >= 0 && hour <= 9) {
-			 hour = "0" + hour;
+				hour = "0" + hour;
 			}
 			if (minutes >= 0 && minutes <= 9) {
-			 minutes = "0" + minutes;
+				minutes = "0" + minutes;
 			}
 			if (seconds >= 0 && seconds <= 9) {
-			 seconds = "0" + seconds;
+				seconds = "0" + seconds;
 			}
-			document.getElementById("info1").innerHTML = "现在是"+year+"年"+month+"月"+day+"日"+hour+':'+minutes+':'+seconds;
-			setTimeout('getNowDate()',500);
+			document.getElementById("info1").innerHTML = "现在是" + year + "年" + month + "月" + day + "日" + hour + ':' + minutes +
+				':' + seconds;
+			setTimeout('getNowDate()', 500);
 		}
 
 		function timet() {
 			var date = new Date();
 			var year = date.getFullYear() // 年
 			var month = date.getMonth() + 1; // 月
-			var day  = date.getDate(); // 日
-			var months = new Array(31,28,31,30,31,30,31,31,30,31,30,31);
+			var day = date.getDate(); // 日
+			var months = new Array(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31);
 			var montht = 0;
 			var timeday = 0;
-			var dayt = months[month-1]-day;
+			var dayt = months[month - 1] - day;
 			var targetm = 10;
 			var targetd = 5;
-			if (targetm-month == 0) {
-				timeday = targetd-day;
-			}
-			else if (targetm-month == 1) {
+			if (targetm - month == 0) {
+				timeday = targetd - day;
+			} else if (targetm - month == 1) {
 				timeday = dayt + targetd;
-			}
-			else {
-				for (var i = month; i < months.length-(months.length-targetm+1); i++) {
+			} else {
+				for (var i = month; i < months.length - (months.length - targetm + 1); i++) {
 					montht += months[i];
 				}
 				timeday = montht + dayt + targetd;
 			}
-			if (targetm-month < 0 || timeday <0) {
+			if (targetm - month < 0 || timeday < 0) {
 				document.getElementById('countdown').innerHTML = "礼成！";
 				document.getElementById('info3').innerHTML = "感谢各位来宾！";
-			}
-			else if (timeday ==0 || timeday == -1) {
+			} else if (timeday == 0 || timeday == -1) {
 				document.getElementById('countdown').innerHTML = "婚礼进行中……";
-				document.getElementById('info3').innerHTML = "祝福！祝福！祝福！！！";				
-			}
-			else {
+				document.getElementById('info3').innerHTML = "祝福！祝福！祝福！！！";
+			} else {
 				document.getElementById('countdown').innerHTML = "倒计时：" + timeday + "天！";
 				//document.getElementById('info3').innerHTML = "快去送上祝福吧！";
 			}
-			
+
 			document.getElementById('info3').innerHTML = "谨定于2021年10月5日为蒋翌欣先生和吴雅女士举行结婚典礼，敬请光临。";
 			//document.getElementById('info4').innerHTML =""
 			//document.getElementById('info5').innerHTML ="时间：10月5日11时28分"
 		}
 
+		// 音乐播放控制
+		window.onload = function () {
+			let mp3 = document.querySelector('#mp3')
+			let playBtn = document.querySelector('#play-btn')
+			let play
+
+			mp3.load()
+
+			document.addEventListener("WeixinJSBridgeReady", function () {
+				mp3.play()
+				if (!mp3.paused) {
+					this.style.animationPlayState = 'running'
+					mp3.play()
+					play = true
+				}
+			}, false)
+
+			play = !mp3.paused && mp3.readyState === 4
+
+			if (play) {
+				playBtn.style.animationPlayState = 'running'
+			} else {
+				playBtn.style.animationPlayState = 'paused'
+			}
+
+			playBtn.addEventListener('click', function (event) {
+				if (play) {
+					this.style.animationPlayState = 'paused'
+					mp3.pause()
+					play = false
+				} else {
+					if (mp3.readyState === 4) {
+						this.style.animationPlayState = 'running'
+						mp3.play()
+						play = true
+					}
+				}
+			})
+		}
 	</script>
 
 </body>
