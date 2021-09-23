@@ -113,7 +113,7 @@
 	/* 音乐播放样式 结束 */
 </style>
 
-<body onload="getNowDate();timet()">
+<body onload="getNowDate();timet();loadMusic()">
 	<div id="play-btn"><i class="iconfont" style="font-size: 20px;"></i></div>
 	<div class="h2">
 		<h2 id="info0"></h2>
@@ -230,7 +230,7 @@
 		}
 
 		// 音乐播放控制
-		window.onload = function () {
+		function loadMusic() {
 			let mp3 = document.querySelector('#mp3')
 			let playBtn = document.querySelector('#play-btn')
 			let play
